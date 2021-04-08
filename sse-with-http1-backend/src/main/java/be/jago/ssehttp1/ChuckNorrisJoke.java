@@ -1,4 +1,4 @@
-package be.jago.ssewithhttp1backend;
+package be.jago.ssehttp1;
 
 public class ChuckNorrisJoke {
 

@@ -1,6 +1,5 @@
-package be.jago.ssewithhttp1backend;
+package be.jago.ssehttp1;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 public class JokeServiceImpl  implements JokeService{
 
     private RestTemplate restTemplate;
-
     private HttpHeaders httpHeaders;
 
     private final String chuckNorrisJokeUrl = "https://api.chucknorris.io/jokes/random";

@@ -1,4 +1,4 @@
-package be.jago.ssewithhttp1backend;
+package be.jago.ssehttp1;
 
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;

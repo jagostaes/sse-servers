@@ -1,4 +1,4 @@
-package be.jago.ssewithhttp1backend;
+package be.jago.ssehttp1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
