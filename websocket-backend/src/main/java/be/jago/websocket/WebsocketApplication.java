@@ -1,13 +1,13 @@
-package be.jago.websocketbackend;
+package be.jago.websocket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebsocketBackendApplication {
+public class WebsocketApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebsocketBackendApplication.class, args);
+        SpringApplication.run(WebsocketApplication.class, args);
     }
 
 }
