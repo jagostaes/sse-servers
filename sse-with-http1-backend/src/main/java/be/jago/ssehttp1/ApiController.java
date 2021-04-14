@@ -22,7 +22,6 @@ public class ApiController {
     public Flux<ServerSentEvent<ChuckNorrisJoke>> streamEvents() {
         return Flux.interval(Duration.ofSeconds(5))
                 .map(sequence -> ServerSentEvent.<ChuckNorrisJoke>builder()
-                        .event("get-new-joke")
                         .data(jokeService.getRandomChuckNorrisJoke())
                         .build());
     }

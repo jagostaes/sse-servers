@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SseWithHttp1BackendApplication {
+public class SSEHttp1Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(SseWithHttp1BackendApplication.class, args);
+        SpringApplication.run(SSEHttp1Application.class, args);
     }
 
 }
