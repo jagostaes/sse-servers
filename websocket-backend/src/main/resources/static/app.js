@@ -11,7 +11,7 @@ function setConnected(connected) {
 function connect() {
     var socket = new SockJS('/websocket');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
+    stompClient.connect({}, function () {
         setConnected(true);
         stompClient.subscribe('/joke/jokestream', function (joke) {
             showJoke(JSON.parse(joke.body).value);

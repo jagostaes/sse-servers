@@ -1,7 +1,6 @@
-package be.jago.ssehttp1;
+package be.jago.websocket.joke;
 
 public class ChuckNorrisJoke {
-
     private String value;
 
     public String getValue() {

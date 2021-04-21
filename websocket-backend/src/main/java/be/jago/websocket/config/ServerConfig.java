@@ -1,4 +1,4 @@
-package be.jago.websocket;
+package be.jago.websocket.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package be.jago.websocket;
+package be.jago.websocket.joke;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.http.HttpEntity;

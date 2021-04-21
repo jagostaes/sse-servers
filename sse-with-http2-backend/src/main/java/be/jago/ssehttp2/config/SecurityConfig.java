@@ -1,4 +1,4 @@
-package be.jago.ssehttp2;
+package be.jago.ssehttp2.config;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

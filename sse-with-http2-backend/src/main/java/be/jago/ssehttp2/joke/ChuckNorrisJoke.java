@@ -1,4 +1,4 @@
-package be.jago.ssehttp2;
+package be.jago.ssehttp2.joke;
 
 public class ChuckNorrisJoke {
 

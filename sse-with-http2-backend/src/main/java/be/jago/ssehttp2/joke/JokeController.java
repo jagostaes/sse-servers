@@ -1,4 +1,4 @@
-package be.jago.ssehttp1;
+package be.jago.ssehttp2.joke;
 
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,11 +10,11 @@ import java.time.Duration;
 
 @RestController
 @RequestMapping("sse-server")
-public class ApiController {
+public class JokeController {
 
     private final JokeService jokeService;
 
-    ApiController(JokeService jokeService){
+    JokeController(JokeService jokeService){
         this.jokeService = jokeService;
     }
 

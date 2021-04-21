@@ -1,4 +1,4 @@
-package be.jago.ssehttp2;
+package be.jago.ssehttp2.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

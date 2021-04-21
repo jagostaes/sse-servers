@@ -1,4 +1,4 @@
-package be.jago.websocket;
+package be.jago.ssehttp1.joke;
 
 import org.springframework.stereotype.Service;
 
