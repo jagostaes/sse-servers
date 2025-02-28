@@ -1,47 +1,42 @@
 package be.jago.websocket.joke;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
-import java.util.Objects;
 
 @Service
 public class JokeServiceImpl implements JokeService, InitializingBean {
 
     private final HttpHeaders httpHeaders;
-    private final RestTemplate restTemplate;
+    private final RestClient restClient;
     private final SimpMessagingTemplate simpMessagingTemplate;
 
-    private final String chuckNorrisJokeUrl = "https://api.chucknorris.io/jokes/random";
-
-    JokeServiceImpl(HttpHeaders httpHeaders, RestTemplate restTemplate, SimpMessagingTemplate simpMessagingTemplate){
+    JokeServiceImpl(HttpHeaders httpHeaders,
+                    RestClient restClient,
+                    SimpMessagingTemplate simpMessagingTemplate) {
         this.httpHeaders = httpHeaders;
-        this.restTemplate = restTemplate;
+        this.restClient = restClient;
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
     @Override
     public ChuckNorrisJoke getRandomChuckNorrisJoke() {
-        ChuckNorrisJoke joke = new ChuckNorrisJoke();
-        ResponseEntity<ChuckNorrisJoke> response = restTemplate.exchange(chuckNorrisJokeUrl, HttpMethod.GET, new HttpEntity<>(httpHeaders), ChuckNorrisJoke.class);
-        if (response.hasBody()) {
-            joke.setValue(Objects.requireNonNull(response.getBody()).getValue());
-        }
-        return joke;
+        return restClient.get()
+                .uri("https://api.chucknorris.io/jokes/random")
+                .headers(headers -> headers.addAll(httpHeaders))
+                .retrieve()
+                .body(ChuckNorrisJoke.class);
     }
 
     @Override
-    public void afterPropertiesSet(){
+    public void afterPropertiesSet() {
         Flux.interval(Duration.ofSeconds(5L))
                 .map((n) -> getRandomChuckNorrisJoke())
-                .subscribe(message -> simpMessagingTemplate.convertAndSend("/joke/jokestream", message));
+                .subscribe(message -> simpMessagingTemplate.convertAndSend("/joke/joke-stream", message));
     }
 }
