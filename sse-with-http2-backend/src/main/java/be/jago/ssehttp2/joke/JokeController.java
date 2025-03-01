@@ -13,14 +13,15 @@ import java.time.Duration;
 public class JokeController {
 
     private final JokeService jokeService;
+    private final Duration interval = Duration.ofSeconds(5);
 
-    JokeController(JokeService jokeService){
+    JokeController(JokeService jokeService) {
         this.jokeService = jokeService;
     }
 
-    @GetMapping("/chuck-norris-joke-stream")
+    @GetMapping(value = "/chuck-norris-joke-stream")
     public Flux<ServerSentEvent<ChuckNorrisJoke>> streamEvents() {
-        return Flux.interval(Duration.ofSeconds(5))
+        return Flux.interval(interval)
                 .map(sequence -> ServerSentEvent.<ChuckNorrisJoke>builder()
                         .data(jokeService.getRandomChuckNorrisJoke())
                         .build());
