@@ -1,35 +1,27 @@
 package be.jago.ssehttp1.joke;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 @Component
-public class JokeServiceImpl  implements JokeService{
+public class JokeServiceImpl implements JokeService {
 
-    private RestTemplate restTemplate;
-    private HttpHeaders httpHeaders;
+    private final RestClient restClient;
+    private final HttpHeaders httpHeaders;
 
-    private final String chuckNorrisJokeUrl = "https://api.chucknorris.io/jokes/random";
-
-    JokeServiceImpl(RestTemplate restTemplate, HttpHeaders httpHeaders){
-        this.restTemplate = restTemplate;
+    JokeServiceImpl(RestClient restClient,
+                    HttpHeaders httpHeaders) {
+        this.restClient = restClient;
         this.httpHeaders = httpHeaders;
     }
 
     @Override
     public ChuckNorrisJoke getRandomChuckNorrisJoke() {
-        ChuckNorrisJoke joke = new ChuckNorrisJoke();
-        ResponseEntity<ChuckNorrisJoke> response = restTemplate.exchange(chuckNorrisJokeUrl,
-                                                                            HttpMethod.GET,
-                                                                            new HttpEntity<>(httpHeaders),
-                                                                            ChuckNorrisJoke.class);
-        if (response.hasBody()) {
-            joke.setValue(response.getBody().getValue());
-        }
-        return joke;
+        return restClient.get()
+                .uri("https://api.chucknorris.io/jokes/random")
+                .headers(headers -> headers.addAll(httpHeaders))
+                .retrieve()
+                .body(ChuckNorrisJoke.class);
     }
 }
